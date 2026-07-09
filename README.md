@@ -39,7 +39,18 @@ npm run dev
 Open http://localhost:3000.
 
 ## Deployment
-This project is compatible with Vercel. Set the DATABASE_URL environment variable in Vercel project settings and deploy.
+This project is compatible with Vercel without code changes.
+
+1. Push this repository to GitHub.
+2. Create a new Vercel project and import the repository.
+3. Add the environment variable `DATABASE_URL` in Vercel project settings.
+4. Optionally add `NEXT_PUBLIC_APP_NAME`.
+5. Deploy.
+
+For TiDB Cloud, use a connection string in the form:
+```env
+DATABASE_URL="mysql://<user>:<password>@<host>:4000/<database>?sslaccept=strict"
+```
 
 ## AI usage
 This project was built with AI-assisted implementation and can be extended with additional moderation, search, or authentication features.
