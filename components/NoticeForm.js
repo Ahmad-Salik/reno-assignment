@@ -37,10 +37,10 @@ export default function NoticeForm({ initialData = null, onSubmit, isSubmitting 
   };
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+    <form onSubmit={handleSubmit} className="space-y-4 rounded-2xl border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
       <div className="grid gap-4 md:grid-cols-2">
         <div>
-          <label className="mb-1 block text-sm font-medium">Title</label>
+          <label className="mb-1 block text-sm font-medium dark:text-slate-200">Title</label>
           <input
             name="title"
             value={form.title}
@@ -50,7 +50,7 @@ export default function NoticeForm({ initialData = null, onSubmit, isSubmitting 
           />
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium">Publish Date</label>
+          <label className="mb-1 block text-sm font-medium dark:text-slate-200">Publish Date</label>
           <input
             name="publishDate"
             type="date"
@@ -63,7 +63,7 @@ export default function NoticeForm({ initialData = null, onSubmit, isSubmitting 
       </div>
 
       <div>
-        <label className="mb-1 block text-sm font-medium">Body</label>
+        <label className="mb-1 block text-sm font-medium dark:text-slate-200">Body</label>
         <textarea
           name="body"
           rows="5"
@@ -76,7 +76,7 @@ export default function NoticeForm({ initialData = null, onSubmit, isSubmitting 
 
       <div className="grid gap-4 md:grid-cols-3">
         <div>
-          <label className="mb-1 block text-sm font-medium">Category</label>
+          <label className="mb-1 block text-sm font-medium dark:text-slate-200">Category</label>
           <select
             name="category"
             value={form.category}
@@ -91,7 +91,7 @@ export default function NoticeForm({ initialData = null, onSubmit, isSubmitting 
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium">Priority</label>
+          <label className="mb-1 block text-sm font-medium dark:text-slate-200">Priority</label>
           <select
             name="priority"
             value={form.priority}
@@ -106,7 +106,7 @@ export default function NoticeForm({ initialData = null, onSubmit, isSubmitting 
           </select>
         </div>
         <div>
-          <label className="mb-1 block text-sm font-medium">Image URL (optional)</label>
+          <label className="mb-1 block text-sm font-medium dark:text-slate-200">Image URL (optional)</label>
           <input
             name="image"
             value={form.image}
