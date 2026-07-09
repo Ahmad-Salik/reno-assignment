@@ -13,20 +13,34 @@ export default function NewNoticePage() {
     setIsSubmitting(true);
     setError('');
 
-    const res = await fetch('/api/notices', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-    const data = await res.json();
-    if (!res.ok) {
-      setError(data.message || 'Unable to create notice');
+    try {
+      const res = await fetch('/api/notices', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+        signal: controller.signal
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.message || 'Unable to create notice');
+        return;
+      }
+
+      router.push('/');
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        setError('The server took too long to respond. Please try again.');
+      } else {
+        setError('Unable to create notice right now.');
+      }
+    } finally {
+      clearTimeout(timeoutId);
       setIsSubmitting(false);
-      return;
     }
-
-    router.push('/');
   };
 
   return (

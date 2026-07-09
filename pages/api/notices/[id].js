@@ -1,5 +1,7 @@
 import prisma from '../../../lib/prisma';
 
+export const runtime = 'nodejs';
+
 export default async function handler(req, res) {
   const { id } = req.query;
 

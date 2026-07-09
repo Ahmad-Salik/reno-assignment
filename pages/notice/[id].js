@@ -27,20 +27,34 @@ export default function EditNoticePage() {
     setIsSubmitting(true);
     setError('');
 
-    const res = await fetch(`/api/notices/${id}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(form)
-    });
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 15000);
 
-    const data = await res.json();
-    if (!res.ok) {
-      setError(data.message || 'Unable to update notice');
+    try {
+      const res = await fetch(`/api/notices/${id}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+        signal: controller.signal
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        setError(data.message || 'Unable to update notice');
+        return;
+      }
+
+      router.push('/');
+    } catch (err) {
+      if (err.name === 'AbortError') {
+        setError('The server took too long to respond. Please try again.');
+      } else {
+        setError('Unable to update notice right now.');
+      }
+    } finally {
+      clearTimeout(timeoutId);
       setIsSubmitting(false);
-      return;
     }
-
-    router.push('/');
   };
 
   return (

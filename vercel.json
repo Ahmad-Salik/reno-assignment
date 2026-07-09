@@ -1,4 +1,12 @@
 {
+  "functions": {
+    "pages/api/notices/index.js": {
+      "maxDuration": 30
+    },
+    "pages/api/notices/[id].js": {
+      "maxDuration": 30
+    }
+  },
   "builds": [
     {
       "src": "package.json",

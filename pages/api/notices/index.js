@@ -1,5 +1,7 @@
 import prisma from '../../../lib/prisma';
 
+export const runtime = 'nodejs';
+
 export default async function handler(req, res) {
   if (req.method === 'GET') {
     const notices = await prisma.notice.findMany({
