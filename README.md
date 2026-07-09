@@ -1,56 +1,200 @@
-# Notice Board
+# Notice Board Application
 
-A complete Notice Board web application built with Next.js Pages Router, Prisma, MySQL-compatible databases, Tailwind CSS, and JavaScript.
+A full-stack Notice Board application built as part of the Reno Platforms Web Development Assignment.
+
+## 🚀 Live Demo
+
+**Application:** https://reno-assignment-cyan.vercel.app/
+
+## 📂 Repository
+
+**GitHub:** https://github.com/Ahmad-Salik/reno-assignment.git
+
+---
 
 ## Features
-- Create, read, update, and delete notices
-- Responsive notice cards on the home page
-- Urgent notices are prioritized by database ordering
-- Reusable notice form for add/edit flows
-- Confirmation before delete
-- API routes under pages/api/notices
 
-## Setup
-1. Clone the repository.
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Create a MySQL-compatible database and copy the example environment file:
-   ```bash
-   cp .env.example .env
-   ```
-4. Update .env with your Prisma connection string:
-   ```env
-   DATABASE_URL="mysql://USER:PASSWORD@HOST:3306/DATABASE"
-   ```
+- Create notices
+- View all notices
+- Edit existing notices
+- Delete notices with confirmation
+- Responsive UI for desktop and mobile
+- Server-side validation
+- Urgent notices displayed first using Prisma `orderBy`
+- RESTful API using Next.js API Routes
+- Data persisted using Prisma ORM and MySQL
 
-## Prisma migration
-Run the following commands:
-```bash
-npx prisma generate
-npx prisma migrate dev --name init
+---
+
+## Tech Stack
+
+- Next.js (Pages Router)
+- React
+- Prisma ORM
+- MySQL (TiDB Cloud)
+- Tailwind CSS
+- Vercel
+
+---
+
+## Project Structure
+
+```
+.
+├── components/
+├── lib/
+├── pages/
+│   ├── api/
+│   ├── notice/
+│   └── index.js
+├── prisma/
+│   └── schema.prisma
+├── public/
+├── styles/
+└── package.json
 ```
 
-## Run locally
+---
+
+## Getting Started
+
+### Prerequisites
+
+- Node.js 18+
+- npm
+- MySQL / TiDB Cloud database
+
+### Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Ahmad-Salik/reno-assignment.git
+```
+
+Navigate into the project:
+
+```bash
+cd reno-assignment
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Create a `.env` file:
+
+```env
+DATABASE_URL="your_database_connection_string"
+```
+
+Generate Prisma Client:
+
+```bash
+npx prisma generate
+```
+
+Push the schema to your database:
+
+```bash
+npx prisma db push
+```
+
+Run the development server:
+
 ```bash
 npm run dev
 ```
-Open http://localhost:3000.
 
-## Deployment
-This project is compatible with Vercel without code changes.
+Open:
 
-1. Push this repository to GitHub.
-2. Create a new Vercel project and import the repository.
-3. Add the environment variable `DATABASE_URL` in Vercel project settings.
-4. Optionally add `NEXT_PUBLIC_APP_NAME`.
-5. Deploy.
-
-For TiDB Cloud, use a connection string in the form:
-```env
-DATABASE_URL="mysql://<user>:<password>@<host>:4000/<database>?sslaccept=strict"
+```
+http://localhost:3000
 ```
 
-## AI usage
-This project was built with AI-assisted implementation and can be extended with additional moderation, search, or authentication features.
+---
+
+## API Endpoints
+
+| Method | Endpoint | Description |
+|--------|----------|-------------|
+| GET | `/api/notices` | Fetch all notices |
+| GET | `/api/notices/[id]` | Fetch a single notice |
+| POST | `/api/notices` | Create a notice |
+| PUT | `/api/notices/[id]` | Update a notice |
+| DELETE | `/api/notices/[id]` | Delete a notice |
+
+---
+
+## Database Schema
+
+```prisma
+model Notice {
+  id          Int      @id @default(autoincrement())
+  title       String
+  body        String   @db.Text
+  category    String
+  priority    String
+  publishDate DateTime
+  image       String?
+  createdAt   DateTime @default(now())
+}
+```
+
+---
+
+## Validation
+
+Server-side validation is implemented for:
+
+- Required title
+- Required body
+- Valid publish date
+- Appropriate HTTP status codes
+
+---
+
+## Deployment
+
+The application is deployed on Vercel.
+
+Live URL:
+
+https://reno-assignment-cyan.vercel.app/
+
+---
+
+## Future Improvements
+
+Given more time, I would add:
+
+- Authentication and authorization
+- Image upload support using cloud storage
+- Search and filtering
+- Pagination
+- Rich text editor for notices
+- Unit and integration tests
+- Better error handling and logging
+
+---
+
+## AI Usage
+
+AI tools (GitHub Copilot and ChatGPT) were used to assist with:
+
+- Project scaffolding
+- Code suggestions
+- Debugging Prisma and deployment issues
+- README preparation
+
+All generated code was reviewed, modified, tested, and integrated manually.
+
+---
+
+## Author
+
+**Ahmad Salik**
+
+GitHub: https://github.com/Ahmad-Salik
